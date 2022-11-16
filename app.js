@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const ping = require('ping');
 const tcpp = require('tcp-ping');
+const request = require('request');
 
 //Configuraciones
 // app.set('port', process.env.PORT || 3000);
@@ -24,13 +25,18 @@ app.use(express.json());
 //Nuestro primer WS Get
 app.get('/ping', (req, res) => {
 
-  tcpp.probe(req.query.host, 80, function (err, available) {
-    res.send({
-      host: req.query.host,
-      isAlive: available,
-      error: err
-    });
-  });
+  // tcpp.probe(req.query.host, 80, function (err, available) {
+  //   res.send({
+  //     host: req.query.host,
+  //     isAlive: available
+  //   });
+  // });
+
+  request(req.query.host, function(error, response, body) {
+    if (error) console.log(error)
+    res.send({ alive: response })
+  })
+
 });
 
 //Iniciando el servidor
