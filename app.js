@@ -4,8 +4,11 @@ const morgan = require('morgan');
 const ping = require('ping');
 
 //Configuraciones
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2);
+
+var port = process.env.PORT || 5000;
+var host = process.env.HOST || 'localhost';
 
 //Middleware
 app.use(function(req, res, next) {
@@ -30,6 +33,4 @@ app.get('/', (req, res) => {
 });
 
 //Iniciando el servidor
-app.listen(app.get('port'), () => {
-  console.log(`Server listening on port ${app.get('port')}`);
-});
+app.listen(port);
