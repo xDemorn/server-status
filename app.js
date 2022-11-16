@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //Nuestro primer WS Get
-app.get('/', (req, res) => {
+app.get('/ping', (req, res) => {
 
   (async function () {
     // const result = await ping.promise.probe(req.query.host, {
