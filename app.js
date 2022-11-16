@@ -59,4 +59,4 @@ app.get('/ping', (req, res) => {
 });
 
 //Iniciando el servidor
-app.listen(port, host);
+app.listen(port);
