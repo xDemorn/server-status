@@ -24,11 +24,15 @@ app.use(express.json());
 app.get('/', (req, res) => {
 
   (async function () {
-    const result = await ping.promise.probe(req.query.host, {
-      timeout: 10
+    // const result = await ping.promise.probe(req.query.host, {
+    //   timeout: 10
+    // });
+
+    ping.sys.probe(req.query.host, function (_alive) {
+
+      res.json({ 'alive': _alive });
     });
   
-    res.json(result);
   })();
 });
 
