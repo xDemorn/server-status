@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const ping = require('ping');
 const tcpp = require('tcp-ping');
 const request = require('request');
+const { tcpPingPort } = require("tcp-ping-port");
+var ht = require('http-test');
 
 //Configuraciones
 // app.set('port', process.env.PORT || 3000);
@@ -32,10 +34,25 @@ app.get('/ping', (req, res) => {
   //   });
   // });
 
-  request(req.query.host, function(error, response, body) {
-    if (error) console.log(error)
-    res.send({ alive: response })
-  })
+  // request(req.query.host, function(error, response, body) {
+  //   if (error) console.log(error)
+  //   res.send({ alive: response })
+  // })
+
+  //   tcpPingPort(req.query.host).then(online => {
+  //     res.send(online)
+  // })
+
+  ht({
+    name: 'http-test'
+  }).add(req.query.host).run()
+    .then(function (result) {
+      res.send(result)
+    })
+    .catch(function(err) {
+      console.log(err)
+      res.send({alive: false});
+    })
 
 });
 
