@@ -23,12 +23,12 @@ app.use(express.json());
 //Nuestro primer WS Get
 app.get('/ping', (req, res) => {
 
-  (async function () {
+  //(async function () {
     // const result = await ping.promise.probe(req.query.host, {
     //   timeout: 10
     // });
 
-    await ping.sys.probe(req.query.host, function (_alive, err) {
+    ping.sys.probe(req.query.host, function (_alive, err) {
 
       res.json({ 'alive': _alive, 'error': err });
     }, {
@@ -37,7 +37,7 @@ app.get('/ping', (req, res) => {
     extra: ['-i', '2'],
 });
   
-  })();
+  //})();
 });
 
 //Iniciando el servidor
