@@ -34,8 +34,8 @@ app.get('/ping', (req, res) => {
   //   res.json({ 'alive': _alive, 'error': err });
   // });
 
-  tcpp.probe('www.google.com', 80, function (err, available) {
-    res.send({ isAlive: available });
+  tcpp.probe(req.query.host, 80, function (err, available) {
+    res.send({ isAlive: available, error: err });
   });
 
   // tcpp.ping({ address: 'www.googles.com' }, function (err, data) {
