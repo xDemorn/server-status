@@ -28,9 +28,9 @@ app.get('/ping', (req, res) => {
     //   timeout: 10
     // });
 
-    ping.sys.probe(req.query.host, function (_alive) {
+    ping.sys.probe(req.query.host, function (_alive, err) {
 
-      res.json({ 'alive': _alive });
+      res.json({ 'alive': _alive, 'error': err });
     });
   
   })();
