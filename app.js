@@ -31,7 +31,11 @@ app.get('/ping', (req, res) => {
     ping.sys.probe(req.query.host, function (_alive, err) {
 
       res.json({ 'alive': _alive, 'error': err });
-    });
+    }, {
+    timeout: 10,
+    // WARNING: -i 2 may not work in other platform like windows
+    extra: ['-i', '2'],
+});
   
   })();
 });
