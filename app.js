@@ -29,6 +29,7 @@ app.use(express.json());
 app.get('/ping', (req, res) => {
 
   tcpp.probe(req.query.host, 80, function (err, available) {
+    if (err) console.log(err)
     res.send({
       host: req.query.host,
       isAlive: available
