@@ -24,25 +24,13 @@ app.use(express.json());
 //Nuestro primer WS Get
 app.get('/ping', (req, res) => {
 
-  // (async function () {
-  // const result = await ping.promise.probe(req.query.host, {
-  //   timeout: 10
-  // });
-
-  // ping.sys.probe(req.query.host, function (_alive, err) {
-
-  //   res.json({ 'alive': _alive, 'error': err });
-  // });
-
   tcpp.probe(req.query.host, 80, function (err, available) {
-    res.send({ isAlive: available, error: err });
+    res.send({
+      host: req.query.host,
+      isAlive: available,
+      error: err
+    });
   });
-
-  // tcpp.ping({ address: 'www.googles.com' }, function (err, data) {
-  //   res.send(data);
-  // });
-
-  // })();
 });
 
 //Iniciando el servidor
